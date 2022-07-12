@@ -1,41 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/public/css/style.css" />
-    <title>Chat</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Rubik:300,regular,500,600,700,800,900"
+      rel="stylesheet"
+    />
+    <title>WhatsApp 2</title>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" />
-      <button>Send</button>
-    </form>
+    <section class="chat">
+      <ul class="messages"></ul>
+      <form class="form" action="">
+        <input
+          class="input"
+          autocomplete="off"
+          placeholder="Escreva sua mensagem"
+        />
+      </form>
+    </section>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      const socket = io();
-
-      const form = document.getElementById("form");
-      const input = document.getElementById("input");
-      const messages = document.getElementById("messages");
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        if (input.value) {
-          socket.emit("chat message", input.value);
-          input.value = "";
-        }
-      });
-
-      socket.on("chat message", (message) => {
-        const item = document.createElement("li");
-        item.innerText = message;
-        messages.appendChild(item);
-        window.scrollTo(0, document.body.scrollHeight);
-      });
-    </script>
+    <script src="/js/index.js" type="module"></script>
   </body>
 </html>
