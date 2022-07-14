@@ -1,5 +1,5 @@
-# webchat
+# Webchat (em desenvolvimento)
 
-Um projeto pessoal envolvendo Webchat com Express e Socket.IO.
+Projeto pessoal envolvendo uma aplicação de chat em tempo real com Express e Socket.IO.
 
-## Projeto em Desenvolvimento
+Esse README será atualizado em breve.
