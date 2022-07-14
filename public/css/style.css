@@ -29,6 +29,7 @@ html {
 
 body {
   height: 100vh;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   background: var(--background-color);
@@ -38,7 +39,6 @@ body {
   width: 50%;
   height: 90vh;
   margin: auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,18 +49,14 @@ body {
 
 /* Form */
 
-form {
+.form {
   width: 100%;
   display: flex;
   gap: 0.5rem;
 }
 
-input,
-button {
-  padding: 0.75rem;
-  border: none;
-  border-radius: 0.25rem;
-  outline: none;
+.form input {
+  margin: 1rem;
 }
 
 input {
@@ -68,29 +64,21 @@ input {
   background-color: rgba(0, 0, 0, 0.05);
   color: var(--text-color);
   transition: background-color 0.2s;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  outline: none;
 }
 
 input:focus {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-button {
-  width: 100px;
-  cursor: pointer;
-  background: var(--primary-color);
-  color: var(--light-color);
-  transition: background 0.2s;
-}
-
-button:hover {
-  background: var(--dark-primary-color);
-}
-
 /* Messages */
 
 .messages {
   width: 100%;
-  margin: 1rem 0;
+  padding: 1rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -126,6 +114,35 @@ button:hover {
   background: var(--dark-primary-color);
 }
 
+/* Chat Header */
+
+.chat-header {
+  width: 100%;
+  height: 70px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.25rem 0.25rem 0 0;
+  background-color: var(--background-color);
+}
+
+.username-input {
+  width: 150px;
+  padding: 0.75rem;
+}
+
+.username {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.username-form {
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* Responsive */
 
 @media (max-width: 768px) {
@@ -135,6 +152,10 @@ button:hover {
 
   .message {
     font-size: 0.8rem;
+  }
+
+  .username-input {
+    width: 50%;
   }
 }
 
