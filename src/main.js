@@ -8,16 +8,22 @@ class BackEnd {
 
   onUserConnection() {
     this.io.on("connection", (socket) => {
-      const userId = uuidv4();
+      let userId = uuidv4();
 
-      this.io.emit("chat message", `User ${userId} connected`);
+      socket.broadcast.emit("user joined", { userId });
 
       socket.on("disconnect", () => {
-        this.io.emit("chat message", `User ${userId} disconnected`);
+        socket.broadcast.emit("user left", { userId });
+      });
+
+      socket.on("get username", (username) => {
+        userId = username;
+
+        this.io.emit("change username", userId);
       });
 
       socket.on("chat message", (message) => {
-        this.io.emit("chat message", `User ${userId}: ${message}`);
+        this.io.emit("chat message", `${userId}: ${message}`);
       });
     });
   }
