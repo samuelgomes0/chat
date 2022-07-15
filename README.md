@@ -4,13 +4,13 @@ Projeto pessoal envolvendo uma aplicação de chat em tempo real com Express e S
 
 Esse README será atualizado conforme o andamento do projeto.
 
-## Futuras Funcionalidades
-  ### Usuário
+## To Do
+  ### 👤 Usuário
   - [ ] Status (online/offline)
   - [ ] Login e logout
   - [ ] Avatares
   
-  ### Mensagens
+  ### ✉️ Mensagens
   - [ ] Envio de mídia
   - [ ] Imagem
   - [ ] Áudio
@@ -19,16 +19,19 @@ Esse README será atualizado conforme o andamento do projeto.
   - [ ] Mencionar usuário
   - [ ] Manter histórico de conversas
   
-  ### Visual
+  ### 👀 Visual
   - [ ] Lista de usuários online
   - [ ] Quantidade de usuários online
+  - [ ] Nome separado da mensagem
+  - [ ] Modo escuro
+  - [ ] Melhor adaptação para celulares
   
-  ### Salas
+  ### 🧱 Salas
   - [ ] Criar, editar e deletar sala
   - [ ] Entrar na sala
   - [ ] Convidar para sala
   - [ ] Salas com senha
   - [ ] Procurar por sala
   
-  ### Integrações
+  ### ⚙️ Integrações
   - [ ] Integração com banco de dados
