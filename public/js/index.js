@@ -57,20 +57,17 @@ class FrontEnd {
 
   listenToUserConnection() {
     const messages = document.querySelector(".messages");
+    const joinOrLeftMessage = document.createElement("li");
 
     this.socket.on("user joined", ({ userId }) => {
-      const userJoined = document.createElement("li");
-
-      userJoined.innerText = `Usuário ${userId} conectado.`;
-      messages.appendChild(userJoined).classList.add("message");
+      joinOrLeftMessage.innerText = `Usuário ${userId} conectado.`;
+      messages.appendChild(joinOrLeftMessage).classList.add("message");
       messages.scrollTo(0, messages.scrollHeight);
     });
 
     this.socket.on("user left", ({ userId }) => {
-      const userLeft = document.createElement("li");
-
-      userLeft.innerText = `Usuário ${userId} desconectado.`;
-      messages.appendChild(userLeft).classList.add("message");
+      joinOrLeftMessage.innerText = `Usuário ${userId} desconectado.`;
+      messages.appendChild(joinOrLeftMessage).classList.add("message");
       messages.scrollTo(0, messages.scrollHeight);
     });
   }
