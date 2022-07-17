@@ -10,15 +10,15 @@ class FrontEnd {
   }
 
   sendMessage() {
-    const form = document.querySelector(".form");
-    const input = document.querySelector(".input");
+    const messagesForm = document.querySelector(".messages__form");
+    const messagesInput = document.querySelector(".messages__form__input");
 
-    form.addEventListener("submit", (event) => {
+    messagesForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      if (input.value) {
-        this.socket.emit("chat message", input.value);
-        input.value = "";
+      if (messagesInput.value) {
+        this.socket.emit("chat message", messagesInput.value);
+        messagesInput.value = "";
       }
     });
   }
@@ -26,7 +26,7 @@ class FrontEnd {
   getAndChangeUsername() {
     const usernameForm = document.querySelector(".username-form");
     const usernameInput = document.querySelector(".username-input");
-    let userName = document.querySelector(".username");
+    let userName = document.querySelector(".chat__header__username");
 
     if (localStorage.getItem("username")) {
       userName.innerText = localStorage.getItem("username");
