@@ -52,9 +52,7 @@ body input:focus {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background: #ffffff;
 }
-
-/* Chat Header */
-.chat-header {
+.chat .chat__header {
   width: 100%;
   height: 4rem;
   display: flex;
@@ -65,18 +63,18 @@ body input:focus {
   background-color: #fafafa;
   border-bottom: 1px solid #e0e0e0;
 }
-.chat-header .username {
+.chat .chat__header .chat__header__username {
   font-size: 1.25rem;
   font-weight: 600;
   color: #333;
 }
-.chat-header .username-form {
+.chat .chat__header .chat__header__form_username {
   display: flex;
   justify-content: flex-end;
 }
 
 /* Form */
-.form {
+.messages__form {
   width: 100%;
   display: flex;
   gap: 0.5rem;
@@ -93,8 +91,7 @@ body input:focus {
   overflow-y: auto;
   word-break: break-word;
 }
-
-.message {
+.messages .message {
   max-width: 99%;
   margin: 0.5rem 0;
   padding: 0.5rem;
@@ -129,7 +126,7 @@ body input:focus {
   .message {
     font-size: 0.8rem;
   }
-  .username-input {
+  .form__username__input {
     width: 50%;
   }
 }
