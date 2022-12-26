@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 class BackEnd {
   constructor(io) {
     this.io = io;
@@ -8,7 +6,7 @@ class BackEnd {
 
   onUserConnection() {
     this.io.on("connection", (socket) => {
-      let userId = uuidv4();
+      let userId = socket.id;
 
       socket.broadcast.emit("user joined", { userId });
 
