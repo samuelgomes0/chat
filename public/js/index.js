@@ -4,7 +4,6 @@ class FrontEnd {
   constructor(socket) {
     this.socket = socket;
     this.sendMessage();
-    this.getAndChangeUsername();
     this.listenToUserConnection();
     this.listenForMessages();
   }
@@ -21,38 +20,6 @@ class FrontEnd {
         messagesInput.value = "";
       }
     });
-  }
-
-  getAndChangeUsername() {
-    const usernameForm = document.querySelector(".username-form");
-    const usernameInput = document.querySelector(".username-input");
-    let userName = document.querySelector(".chat__header__username");
-
-    if (localStorage.getItem("username")) {
-      userName.innerText = localStorage.getItem("username");
-
-      this.socket.emit("get username", localStorage.getItem("username"));
-    } else {
-      usernameForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        if (usernameInput.value) {
-          userName.innerText = usernameInput.value;
-          usernameInput.value = "";
-
-          this.socket.emit("get username", userName.innerText);
-
-          this.socket.on("change username", (userId) => {
-            if (localStorage.getItem("username") === true) {
-              userName = localStorage.getItem("username");
-              return;
-            } else {
-              localStorage.setItem("username", userId);
-            }
-          });
-        }
-      });
-    }
   }
 
   listenToUserConnection() {
