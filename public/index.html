@@ -1,43 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
-    />
-    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css?family=Rubik:300,regular,500,600,700,800,900"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Rubik:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>WhatsApp 2</title>
   </head>
   <body>
-    <section class="chat">
-      <div class="chat__header">
-        <span class="chat__header__username"></span>
-        <form class="chat__header__form__username">
-          <input
-            type="text"
-            autocomplete="off"
-            placeholder="Escreva seu nome"
-            class="form__username__input"
-          />
-        </form>
-      </div>
-      <ul class="messages"></ul>
-      <form class="messages__form">
+    <div class="blur active"></div>
+    <section class="join-screen active">
+      <h1>Join Chatroom</h1>
+      <form class="join-form">
+        <label for="username">Username</label>
         <input
           type="text"
+          name="username"
+          id="username"
+          placeholder="Enter username"
           autocomplete="off"
-          placeholder="Escreva sua mensagem"
-          class="messages__form__input"
         />
+        <button type="submit">Join</button>
       </form>
     </section>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js" type="module"></script>
+    <section class="chat-screen">
+      <div class="side-menu">
+        <div class="side-menu--header">
+          <h2>Users</h2>
+          <input
+            type="search"
+            name="search-user"
+            id="search-user"
+            placeholder="Search user"
+          />
+        </div>
+        <ul class="users"></ul>
+        <div class="user-profile">
+          <h3 id="your-name">John Doe</h3>
+          <div class="user-info">
+            <span class="online"></span>
+            <p>Online</p>
+          </div>
+        </div>
+      </div>
+      <div class="chat-box">
+        <ul class="messages"></ul>
+        <form class="message-form">
+          <input
+            type="text"
+            name="message-input"
+            id="message-input"
+            placeholder="Type a message"
+            autocomplete="off"
+          />
+          <button>Send</button>
+        </form>
+      </div>
+    </section>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>

@@ -2,7 +2,12 @@ $primary-color: #7d53de
 $dark-primary-color: #5b4cb7
 $light-primary-color: #9a86ea
 
-$light-color: #ffffff
+$online: #50fa7b
+$offline: #ff5555
+$away: #f1fa8c
+
+$light-color: #f2f2f2
+$dark-color: #333
 $background-color: #fafafa
 $text-color: #333
 $border-color: #e0e0e0
@@ -17,6 +22,10 @@ $rgba-color: rgba(0, 0, 0, 0.1)
   list-style: none
   scroll-behavior: smooth
 
+  &::selection
+    background-color: $primary-color
+    color: $light-color
+
 @media (max-width: 1080px)
   html
     font-size: 93.75%
@@ -26,89 +35,245 @@ $rgba-color: rgba(0, 0, 0, 0.1)
     font-size: 87.5%
 
 body
-  height: 100vh
-  padding: 0 2rem
   display: flex
   align-items: center
   background: $background-color
+  color: $text-color
+
+  h1, h2, h3, h4, h5, h6, p
+    line-height: 1.5
 
   input
     width: 100%
-    margin: 1rem
-    background-color: rgba(0, 0, 0, 0.05)
-    color: $text-colorz
-    transition: background-color 0.2s
+    height: 40px
     padding: 0.75rem
     border: none
     border-radius: 0.25rem
     outline: none
+    background-color: rgba(0, 0, 0, 0.05)
+    color: $text-color
+    transition: background-color 0.2s
 
     &:focus
       background-color: $rgba-color
+      outline: 2px solid $primary-color
+
+  button
+    width: 80px
+    height: 40px
+    border: none
+    border-radius: 0.25rem
+    cursor: pointer
+    background-color: $dark-color
+    color: $light-color
+
+    &:hover
+      background-color: $primary-color
+
+    &:focus
+      background-color: $primary-color
+      outline: none
+
+.blur
+  display: none
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  backdrop-filter: blur(10px)
+  z-index: 1
+
+.blur.active
+  display: block
+
+// Join Screen
+.join-screen
+  width: 35%
+  height: 50%
+  padding: 2rem
+  display: none
+  justify-content: center
+  align-items: start
+  flex-direction: column
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  border: 1px solid $border-color
+  border-radius: 0.25rem
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05)
+  background-color: $light-color
+  z-index: 2
+
+  form
+    width: 100%
+    display: flex
+    flex-direction: column
+
+  h1
+    margin-bottom: 2rem
+    font-size: 1.75rem
+
+    &::after
+      content: ""
+      display: block
+      width: 100%
+      height: 2px
+      background-color: $primary-color
+
+  label
+    display: block
+    margin-bottom: 0.5rem
+
+  button
+    width: 80px
+    height: 40px
+    margin-top: 1.5rem
+    border: none
+    border-radius: 0.25rem
+    cursor: pointer
+    background-color: $dark-color
+    color: $light-color
+
+    &:hover
+      background-color: $primary-color
+
+    &:focus
+      background-color: $primary-color
+      outline: none
+
+.join-screen.active
+  display: flex
 
 /* Chat */
-.chat
-  width: 50%
-  height: 90vh
-  margin: auto
+.chat-screen
+  width: 100%
+  height: 100vh
   display: flex
-  flex-direction: column
-  align-items: center
-  border-radius: 0.25rem
-  box-shadow: 0 0 10px $rgba-color
-  background: $light-color
 
-  .chat__header
-    width: 100%
-    height: 4rem
+  .side-menu
+    width: 25%
+    height: 100vh
+    padding: 1rem
     display: flex
-    align-items: center
-    justify-content: space-between
-    padding: 0 1rem
-    border-radius: 0.25rem 0.25rem 0 0
-    background-color: $background-color
-    border-bottom: 1px solid $border-color
+    flex-direction: column
+    border-right: 1px solid $border-color
+    background-color: $light-color
 
-    .chat__header__username
-      font-size: 1.25rem
-      font-weight: 600
-      color: $text-color
+    .user
+      margin-bottom: 1rem
+      padding-bottom: 0.5rem
+      border-bottom: 1px solid $border-color
 
-    .chat__header__form_username
+    .user-profile
+      padding-top: 1rem
+      border-top: 1px solid $border-color
+
+      #your-name
+        cursor: pointer
+
+        &:hover
+          text-decoration: underline
+
+    .user, .user-profile
       display: flex
-      justify-content: flex-end
+      flex-direction: column
 
-/* Form */
-.messages__form
-  width: 100%
-  display: flex
-  gap: 0.5rem
+      h3
+        margin-bottom: 0.25rem
+        font-size: 1rem
+        font-weight: 500
 
-/* Messages */
-.messages
-  width: 100%
-  padding: 1rem
-  flex: 1
-  display: flex
-  flex-direction: column
-  align-items: flex-start
-  overflow-y: auto
-  word-break: break-word
+      .user-info
+        display: flex
+        align-items: center
 
-  .message
-    max-width: 99%
-    margin: 0.5rem 0
-    padding: 0.5rem
+        span
+          display: inline-block
+          width: 10px
+          height: 10px
+          margin-right: 0.5rem
+          border-radius: 50%
+          background-color: $offline
+
+          &.online
+            background-color: $online
+
+        p
+          font-size: 0.75rem
+
+    .side-menu--header
+      margin-bottom: 1rem
+      padding-bottom: 1rem
+      border-bottom: 1px solid $border-color
+
+      h2
+        margin-bottom: 1rem
+        font-size: 1.25rem
+
+      input
+        text-align: left
+
+    .users
+      flex: 1
+      overflow-y: auto
+
+  .chat-box
+    width: 100%
+    height: 100vh
+    padding: 2rem
     display: flex
-    align-items: center
-    border-radius: 0.25rem
-    box-shadow: 0 0 10px $rgba-color
-    font-size: 0.9rem
-    background-color: $primary-color
-    color: $light-color
+    justify-content: space-between
+    flex-direction: column
+
+    .messages
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      overflow-y: scroll
+
+      .message
+        max-width: 50%
+        margin: 1rem 0
+
+        ::selection
+          background-color: $light-color
+          color: $text-color
+
+      .message-info
+        display: flex
+        justify-content: space-between
+        align-items: center
+        position: relative
+        gap: 1rem
+
+        h3
+          font-size: 1rem
+          font-weight: 500
+          line-height: 1
+
+        span
+          font-size: 0.75rem
+
+      .message-text
+        max-width: 100%
+        margin-top: 0.5rem
+        padding: 0.3rem 1rem
+        border-radius: 0.25rem
+        background-color: $primary-color
+        color: $light-color
+
+    .message-form
+      margin-top: 2rem
+      display: flex
+      justify-content: space-between
+      align-items: center
+      gap: 1rem
 
 ::-webkit-scrollbar
   width: 0.25rem
+  background-color: $light-color
 
 ::-webkit-scrollbar-thumb
   border-radius: 0.25rem
@@ -117,24 +282,3 @@ body
 
 ::-webkit-scrollbar-thumb:hover
   background: $dark-primary-color
-
-/* Responsive */
-@media (max-width: 768px)
-  .chat
-    width: 90%
-
-  .message
-    font-size: 0.8rem
-
-  .form__username__input
-    width: 50%
-
-@media (min-width: 1440px)
-  .message
-    font-size: 1rem
-
-@media (min-width: 1920px)
-  .message
-    font-size: 1.1rem
-
-/*# sourceMappingURL=style.sass.map */
