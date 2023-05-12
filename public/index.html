@@ -15,6 +15,21 @@
   </head>
   <body>
     <div class="blur active"></div>
+    <div class="change-username-screen">
+      <h1>Change Username</h1>
+      <form class="change-username-form">
+        <label for="username">New username</label>
+        <input
+          type="text"
+          name="username"
+          id="change-username"
+          placeholder="Enter username"
+          autocomplete="off"
+          required
+        />
+        <button type="submit">Change</button>
+      </form>
+    </div>
     <section class="join-screen active">
       <h1>Join Chatroom</h1>
       <form class="join-form">
@@ -40,7 +55,9 @@
             placeholder="Search user"
           />
         </div>
-        <ul class="users"></ul>
+        <ul class="users">
+          <p class="no-users-found">No users found.</p>
+        </ul>
         <div class="user-profile">
           <h3 id="your-name">John Doe</h3>
           <div class="user-info">
@@ -51,6 +68,7 @@
       </div>
       <div class="chat-box">
         <ul class="messages"></ul>
+        <p class="user-is-typing"><span>User</span> is typing...</p>
         <form class="message-form">
           <input
             type="text"

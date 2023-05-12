@@ -87,6 +87,51 @@ body
 .blur.active
   display: block
 
+// Change Username
+.change-username-screen
+  width: 35%
+  height: 50%
+  padding: 2rem
+  display: none
+  justify-content: center
+  align-items: start
+  flex-direction: column
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  border: 1px solid $border-color
+  border-radius: 0.25rem
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05)
+  background-color: $light-color
+  z-index: 2
+
+  h1
+    margin-bottom: 2rem
+    font-size: 1.75rem
+
+    &::after
+      content: ""
+      display: block
+      width: 100%
+      height: 2px
+      background-color: $primary-color
+
+  form
+    width: 100%
+    display: flex
+    flex-direction: column
+
+    label
+      display: block
+      margin-bottom: 0.5rem
+
+    button
+      margin-top: 1.5rem
+
+  &.active
+    display: flex
+
 // Join Screen
 .join-screen
   width: 35%
@@ -161,6 +206,11 @@ body
     border-right: 1px solid $border-color
     background-color: $light-color
 
+    .no-users-found
+      font-size: 1rem
+      text-align: center
+      display: none
+
     .user
       margin-bottom: 1rem
       padding-bottom: 0.5rem
@@ -227,7 +277,15 @@ body
     justify-content: space-between
     flex-direction: column
 
+    .user-is-typing
+      font-size: 0.75rem
+      display: none
+
+    .user-is-typing.active
+      display: block
+
     .messages
+      height: 100%
       display: flex
       flex-direction: column
       align-items: flex-start
@@ -261,11 +319,12 @@ body
         margin-top: 0.5rem
         padding: 0.3rem 1rem
         border-radius: 0.25rem
+        word-break: break-all
         background-color: $primary-color
         color: $light-color
 
     .message-form
-      margin-top: 2rem
+      margin-top: 0.5rem
       display: flex
       justify-content: space-between
       align-items: center
@@ -282,3 +341,34 @@ body
 
 ::-webkit-scrollbar-thumb:hover
   background: $dark-primary-color
+
+// Responsive
+
+@media screen and (max-width: 768px)
+
+  .join-screen
+    width: 90%
+
+  .chat-screen
+    flex-direction: column
+
+    .side-menu
+      display: none
+
+    .chat-box
+      width: 100%
+      height: 100%
+
+      .messages
+        flex: 1
+
+      .message-form
+        margin-top: 1rem
+        flex-direction: column
+        gap: 0.5rem
+
+      .message-form input
+        width: 100%
+
+      .message-form button
+        display: none

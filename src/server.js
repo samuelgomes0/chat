@@ -11,31 +11,31 @@ const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, "/public")));
 
+const userList = new Map();
+
 io.on("connection", (socket) => {
-  let users = [];
-
   socket.on("join", (username) => {
-    console.log(`${username} joined`);
-
     socket.username = username;
 
-    users.push(username);
+    userList.set(username, socket.id);
 
     socket.broadcast.emit("insert user", {
       username: socket.username,
-      users,
+      users: userList,
     });
+
+    console.log(`${username} joined`);
   });
 
   socket.on("disconnect", () => {
-    console.log(`${socket.username} disconnected`);
-
-    users = users.filter((user) => user !== socket.username);
+    userList.delete(socket.username);
 
     socket.broadcast.emit("remove user", {
       username: socket.username,
-      users,
+      users: userList,
     });
+
+    console.log(`${socket.username} disconnected`);
   });
 
   socket.on("message", (message) => {
@@ -54,13 +54,18 @@ io.on("connection", (socket) => {
   socket.on("change username", (username) => {
     const oldUsername = socket.username;
 
-    console.log(`${oldUsername} changed username to ${username}`);
-
     socket.username = username;
 
     io.emit("warn change username", {
       oldUsername,
       username,
+    });
+    console.log(`${oldUsername} changed username to ${username}`);
+  });
+
+  socket.on("user is typing", () => {
+    socket.broadcast.emit("user is typing", {
+      username: socket.username,
     });
   });
 });

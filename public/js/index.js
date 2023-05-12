@@ -6,94 +6,136 @@ const form = document.querySelector(".join-form");
 const usernameInput = document.getElementById("username");
 const searchUser = document.getElementById("search-user");
 const yourName = document.getElementById("your-name");
+const messageForm = document.querySelector(".message-form");
 
-// Get username from local storage or ask for it
-if (localStorage.getItem("username")) {
-  yourName.innerText = localStorage.getItem("username");
+function handleUsername() {
+  const username = localStorage.getItem("username");
 
-  socket.emit("join", localStorage.getItem("username"));
+  if (username) {
+    yourName.innerText = username;
 
-  joinScreen.classList.remove("active");
-  blurScreen.classList.remove("active");
-} else {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+    joinScreen.classList.remove("active");
+    blurScreen.classList.remove("active");
 
-    const username = usernameInput.value;
+    socket.emit("join", username);
+  } else {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    if (username.length >= 3) {
-      socket.emit("join", username);
+      const username = usernameInput.value;
 
-      yourName.innerText = username;
+      if (username.length >= 3) {
+        yourName.innerText = username;
 
-      localStorage.setItem("username", username);
+        localStorage.setItem("username", username);
 
-      socket.emit("join", username);
+        joinScreen.classList.remove("active");
+        blurScreen.classList.remove("active");
 
-      joinScreen.classList.remove("active");
-      blurScreen.classList.remove("active");
+        socket.emit("join", username);
+      }
+    });
+  }
+}
+
+function searchUsers() {
+  searchUser.addEventListener("keyup", () => {
+    const searchValue = searchUser.value;
+    const users = document.querySelectorAll(".user");
+    const noUsersFoundElement = document.querySelector(".no-users-found");
+    let index = 0;
+
+    for (index; index < users.length; index++) {
+      const username = users[index].querySelector("h3").innerText;
+
+      if (username.toLowerCase().startsWith(searchValue.toLowerCase())) {
+        users[index].style.display = "flex";
+
+        noUsersFoundElement.style.display = "none";
+      } else {
+        users[index].style.display = "none";
+
+        noUsersFoundElement.style.display = "flex";
+      }
     }
   });
 }
 
-// Search for users
-searchUser.addEventListener("keyup", () => {
-  const searchValue = searchUser.value;
-  const users = document.querySelectorAll(".user");
-  let index = 0;
-
-  for (index; index < users.length; index++) {
-    const username = users[index].querySelector("h3").innerText;
-
-    if (username.toLowerCase().startsWith(searchValue.toLowerCase())) {
-      users[index].style.display = "flex";
-    } else {
-      users[index].style.display = "none";
-    }
-  }
-});
-
 // Send message
-const messageForm = document.querySelector(".message-form");
-const messageInput = document.getElementById("message-input");
+function sendMessage() {
+  const messageInput = document.getElementById("message-input");
 
-messageForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+  messageForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  const message = messageInput.value;
+    const message = messageInput.value;
 
-  if (message.length > 0) {
-    socket.emit("message", message);
+    if (message.length > 0) {
+      socket.emit("message", message);
 
-    messageInput.value = "";
-  }
-});
+      messageInput.value = "";
+    }
+  });
+}
 
 // Receive message
-socket.on("message", ({ message, time, username }) => {
-  const messages = document.querySelector(".messages");
-  const messageElement = document.createElement("li");
-  const messageInfo = document.createElement("div");
-  const usernameElement = document.createElement("h3");
-  const timeElement = document.createElement("span");
-  const messageText = document.createElement("p");
+function receiveMessage() {
+  socket.on("message", ({ message, time, username }) => {
+    const messages = document.querySelector(".messages");
+    const messageElement = document.createElement("li");
+    const messageInfo = document.createElement("div");
+    const usernameElement = document.createElement("h3");
+    const timeElement = document.createElement("span");
+    const messageText = document.createElement("p");
 
-  messageElement.classList.add("message");
-  messageInfo.classList.add("message-info");
-  messageText.classList.add("message-text");
+    messageElement.classList.add("message");
+    messageInfo.classList.add("message-info");
+    messageText.classList.add("message-text");
 
-  messages.appendChild(messageElement);
-  messageElement.appendChild(messageInfo);
-  messageInfo.appendChild(usernameElement);
-  messageInfo.appendChild(timeElement);
-  messageElement.appendChild(messageText);
+    messages.appendChild(messageElement);
+    messageElement.appendChild(messageInfo);
+    messageInfo.appendChild(usernameElement);
+    messageInfo.appendChild(timeElement);
+    messageElement.appendChild(messageText);
 
-  usernameElement.innerText = username;
-  timeElement.innerText = time;
-  messageText.innerText = message;
+    usernameElement.innerText = username;
+    timeElement.innerText = time;
+    messageText.innerText = message;
 
-  messages.scrollTo(0, messages.scrollHeight);
-});
+    messages.scrollTo(0, messages.scrollHeight);
+  });
+}
+
+function userIsTyping() {
+  const messageInput = document.getElementById("message-input");
+  const userIsTyping = document.querySelector(".user-is-typing");
+  const userIsTypingName = userIsTyping.children[0].textContent;
+
+  messageInput.addEventListener("keyup", () => {
+    const message = messageInput.value;
+
+    if (message.length > 0) {
+      socket.emit("user is typing", userIsTypingName);
+    } else {
+      userIsTyping.classList.remove("active");
+    }
+  });
+
+  socket.on("user is typing", ({ username }) => {
+    userIsTyping.classList.add("active");
+    userIsTyping.children[0].textContent = username;
+
+    setTimeout(() => {
+      userIsTyping.classList.remove("active");
+    }, 3000);
+  });
+
+  messageForm.addEventListener("submit", () => {
+    userIsTyping.classList.remove("active");
+
+    console.log("submit");
+  });
+}
 
 // Insert new user in the list
 socket.on("insert user", ({ username }) => {
@@ -136,14 +178,41 @@ socket.on("remove user", ({ username }) => {
 });
 
 // Change username
-yourName.addEventListener("click", () => {
-  const username = prompt("Enter your new username");
+function changeUsername() {
+  yourName.addEventListener("click", () => {
+    const changeUsernameForm = document.querySelector(".change-username-form");
+    const changeUsernameScreen = document.querySelector(
+      ".change-username-screen"
+    );
 
-  if (username.length >= 3) {
-    socket.emit("change username", username);
+    changeUsernameScreen.classList.add("active");
+    blurScreen.classList.add("active");
 
-    yourName.innerText = username;
+    changeUsernameForm.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    localStorage.setItem("username", username);
-  }
-});
+      const usernameInput = document.getElementById("change-username");
+      const username = usernameInput.value;
+
+      if (username.length >= 3) {
+        yourName.innerText = username;
+
+        localStorage.setItem("username", username);
+
+        usernameInput.value = "";
+
+        changeUsernameScreen.classList.remove("active");
+        blurScreen.classList.remove("active");
+
+        socket.emit("change username", username);
+      }
+    });
+  });
+}
+
+handleUsername();
+searchUsers();
+sendMessage();
+receiveMessage();
+userIsTyping();
+changeUsername();

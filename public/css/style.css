@@ -78,6 +78,51 @@ body button:focus {
   display: block;
 }
 
+.change-username-screen {
+  width: 35%;
+  height: 50%;
+  padding: 2rem;
+  display: none;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #e0e0e0;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+  background-color: #f2f2f2;
+  z-index: 2;
+}
+.change-username-screen h1 {
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+}
+.change-username-screen h1::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #7d53de;
+}
+.change-username-screen form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.change-username-screen form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.change-username-screen form button {
+  margin-top: 1.5rem;
+}
+.change-username-screen.active {
+  display: flex;
+}
+
 .join-screen {
   width: 35%;
   height: 50%;
@@ -153,6 +198,11 @@ body button:focus {
   border-right: 1px solid #e0e0e0;
   background-color: #f2f2f2;
 }
+.chat-screen .side-menu .no-users-found {
+  font-size: 1rem;
+  text-align: center;
+  display: none;
+}
 .chat-screen .side-menu .user {
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
@@ -219,7 +269,15 @@ body button:focus {
   justify-content: space-between;
   flex-direction: column;
 }
+.chat-screen .chat-box .user-is-typing {
+  font-size: 0.75rem;
+  display: none;
+}
+.chat-screen .chat-box .user-is-typing.active {
+  display: block;
+}
 .chat-screen .chat-box .messages {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -253,11 +311,12 @@ body button:focus {
   margin-top: 0.5rem;
   padding: 0.3rem 1rem;
   border-radius: 0.25rem;
+  word-break: break-all;
   background-color: #7d53de;
   color: #f2f2f2;
 }
 .chat-screen .chat-box .message-form {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -277,6 +336,36 @@ body button:focus {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #5b4cb7;
+}
+
+@media screen and (max-width: 768px) {
+  .join-screen {
+    width: 90%;
+  }
+  .chat-screen {
+    flex-direction: column;
+  }
+  .chat-screen .side-menu {
+    display: none;
+  }
+  .chat-screen .chat-box {
+    width: 100%;
+    height: 100%;
+  }
+  .chat-screen .chat-box .messages {
+    flex: 1;
+  }
+  .chat-screen .chat-box .message-form {
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .chat-screen .chat-box .message-form input {
+    width: 100%;
+  }
+  .chat-screen .chat-box .message-form button {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
