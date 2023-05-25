@@ -5,9 +5,10 @@ Aplicação de chat em tempo real que usa as tecnologias React, Tailwind CSS, Ex
 Para instalar esta aplicação em sua máquina local, siga estas etapas:
 
 1. Clone este repositório em sua máquina local.
-2. Navegue até o diretório da aplicação no terminal.
-3. Execute o comando `npm install` ou `yarn` para instalar as dependências necessárias.
-4. Execute o comando `npm/yarn start` para iniciar o servidor.
+2. Navegue até ambos os diretórios `client` e `server` da aplicação no terminal.
+3. Execute o comando `npm install` ou `yarn` para instalar as dependências necessárias de cada.
+4. Inicie o servidor com `npm/yarn start` no diretório `server`.
+5. Inicie o cliente com `npm run dev` ou `yarn dev` no diretório `client`.
 
 ## 🚀 Uso
 Para usar esta aplicação, siga estas etapas:
