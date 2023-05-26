@@ -1,34 +1,36 @@
 # Chat (em desenvolvimento)
-Aplicação de chat em tempo real que usa as bibliotecas Express e Socket.IO para fornecer uma experiência de chat ao vivo para os usuários. Os usuários podem criar salas de bate-papo e se comunicar em tempo real com outros usuários que também estão na mesma sala de bate-papo.
+Aplicação de chat em tempo real que usa as tecnologias React, Tailwind CSS, Express e Socket.IO para fornecer uma experiência de chat ao vivo para os usuários. Os usuários podem logar, se cadastrar, alterar seu nick e conversar com usuários!
 
 ## 🔧 Instalação
 Para instalar esta aplicação em sua máquina local, siga estas etapas:
 
 1. Clone este repositório em sua máquina local.
-2. Navegue até o diretório da aplicação no terminal.
-3. Execute o comando `npm install` para instalar as dependências necessárias.
-4. Execute o comando `npm start` para iniciar o servidor.
+2. Navegue até ambos os diretórios `client` e `server` da aplicação no terminal.
+3. Execute o comando `npm install` ou `yarn` para instalar as dependências necessárias de cada.
+4. Inicie o servidor com `npm/yarn start` no diretório `server`.
+5. Inicie o cliente com `npm run dev` ou `yarn dev` no diretório `client`.
 
 ## 🚀 Uso
 Para usar esta aplicação, siga estas etapas:
 
 1. Acesse a página inicial da aplicação no seu navegador (por exemplo, http://localhost:3000).
-2. Digite o nome da sala de bate-papo que você deseja criar.
-3. Compartilhe o nome da sala de bate-papo com outros usuários que você deseja convidar para a sala.
-4. Os usuários convidados devem digitar o nome da sala de bate-papo na página inicial para participar da sala.
-5. Agora, você e outros usuários podem se comunicar em tempo real na sala de bate-papo.
+2. Insira o seu nome e a sua senha para entrar. Caso não tenha uma conta, basta se registrar.
+3. Selecione o usuário com quem deseja conversar na lista de usuários online.
+4. Troque mensagens!
 
 ## 🛠️ Tecnologias utilizadas
 Esta aplicação usa as seguintes tecnologias:
 
-- **Node.JS** - ambiente de tempo de execução JavaScript.
-- **Express** - framework web para Node.js.
-- **Socket.IO** - biblioteca para comunicação em tempo real entre cliente e servidor.
+- **Node.JS** - plataforma de desenvolvimento que permite a criação de aplicativos de servidor em JavaScript.
+- **Express** - framework para Node.js que simplifica a criação de aplicativos web, fornecendo uma estrutura robusta e flexível para lidar com rotas, middleware e solicitações HTTP.
+- **Socket.IO** - biblioteca que permite a comunicação em tempo real entre o servidor e o cliente, permitindo a troca de dados bidirecional e instantânea.
+- **React.JS** - biblioteca JavaScript para criação de interfaces de usuário interativas e reativas, permitindo a construção eficiente de componentes reutilizáveis para construir aplicativos web complexos.
+- **Tailwind CSS** - framework CSS altamente configurável e utilitário que simplifica a estilização de elementos HTML, fornecendo classes pré-definidas que podem ser combinadas para criar estilos personalizados de forma rápida e eficiente.
 
 ## ⚙️ To Do
    ### Usuário
   - [X] Status (online/offline)
-  - [ ] Login e logout
+  - [X] Login e logout
   - [ ] Avatares
   
   ### Mensagens
@@ -43,7 +45,7 @@ Esta aplicação usa as seguintes tecnologias:
   ### Visual
   - [X] Lista de usuários online
   - [ ] Quantidade de usuários online
-  - [ ] Nome separado da mensagem
+  - [X] Nome separado da mensagem
   - [ ] Modo escuro
   - [ ] Melhor adaptação para celulares
   
@@ -72,4 +74,4 @@ Esta aplicação está licenciada sob a licença MIT. Consulte o arquivo LICENSE
 
 ---
 
-**Desenvolvido com ❤ por [Samuel Gomes](https://github.com/Saesel/).**
+**Desenvolvido com ❤ por [Saesel](https://github.com/saesel/).**
