@@ -8,6 +8,11 @@
   }
 }
 
+*::selection {
+  background-color: #2563eb;
+  color: #fff;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

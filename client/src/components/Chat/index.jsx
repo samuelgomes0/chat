@@ -102,65 +102,60 @@ export default function Chat({ socket }) {
   }, [messageList]);
 
   return (
-    <section className="flex h-screen w-screen">
-      <div className="flex h-full flex-col justify-between border-r border-gray-300 bg-gray-50">
-        <div className="border-b border-gray-300 p-5">
-          <input
-            type="text"
-            placeholder="Search for users"
-            autoComplete="off"
-            className="rounded border border-neutral-300 p-2 transition-colors hover:bg-gray-100 focus:border-transparent focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-600"
-          />
-        </div>
-        <ul className="h-full overflow-y-auto">
+    <section className="flex h-screen w-screen gap-4 p-8">
+      <div className="flex h-full w-1/4 flex-col justify-between gap-4">
+        <input
+          type="text"
+          placeholder="Search"
+          autoComplete="off"
+          className="w-full rounded-xl border border-gray-300 bg-white p-3.5 text-sm shadow-sm transition-colors hover:bg-neutral-100 focus:border-transparent focus:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+        />
+        <ul className="h-full overflow-y-auto rounded-xl border border-gray-300 bg-white shadow-sm">
           {onlineUsers.map(
             (user, index) =>
               user.id !== socket.id && (
-                <li key={index}>
-                  <h3>{user.username}</h3>
+                <li
+                  key={index}
+                  className="h-20 border-b border-gray-200 p-4 transition-colors hover:cursor-pointer hover:bg-neutral-200"
+                >
+                  <h3 className="font-semibold">{user.username}</h3>
+                  <p className="text-sm text-gray-500">{lastMessage}</p>
                 </li>
               )
           )}
         </ul>
-        <div className="flex justify-between border-t border-gray-300 p-5">
+        <div className="flex justify-between rounded-xl border border-gray-300 bg-white p-4 text-center shadow-sm">
           <h3
             title="Change your username"
             onClick={() => changeUsername()}
-            className="cursor-pointer text-xl font-semibold hover:underline"
+            className="cursor-pointer font-semibold hover:underline"
           >
             {username}
           </h3>
           <button
             onClick={() => handleLogout()}
-            className="text-sm font-semibold text-purple-600 hover:underline"
+            className="text-xs font-semibold text-purple-600 hover:underline"
           >
             Logout
           </button>
         </div>
       </div>
-      <div className="flex h-screen w-full flex-col">
-        <ul className="h-full">
+      <div className="flex h-full w-full flex-col justify-between gap-4 rounded-xl border border-gray-300 bg-white p-4 shadow-sm">
+        <ul className="flex h-full flex-col gap-4 overflow-y-auto">
           {messageList.map((message, index) => (
-            <Message
-              key={index}
-              message={message}
-              className={message.userId === socket.id ? "my-message" : ""}
-              socket={socket}
-            />
+            <Message key={index} message={message} socket={socket} />
           ))}
           <div ref={bottomRef} />
         </ul>
         {isTyping && <p>User {userTypingRef.current} is typing...</p>}
-        <form
-          onSubmit={handleSubmit}
-          className="border-t border-gray-300 bg-gray-50 p-5"
-        >
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Type your message"
+            autoComplete="off"
+            className="w-full rounded-xl border border-gray-200 bg-white p-3.5 text-sm transition-colors hover:bg-neutral-100 focus:border-transparent focus:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
             ref={messageRef}
-            onChange={() => handleTyping()}
-            className="w-full rounded border border-neutral-300 p-2  transition-colors hover:bg-gray-100 focus:border-transparent focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-600"
+            onChange={handleTyping}
           />
         </form>
       </div>

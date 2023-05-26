@@ -8,7 +8,7 @@ export default function App() {
   const [socket, setSocket] = useState(null);
 
   return (
-    <main className="flex h-screen w-screen items-center justify-center bg-gray-100">
+    <main className="flex h-screen w-screen items-center justify-center bg-gray-200">
       {chatVisible ? (
         <Chat socket={socket} />
       ) : (
