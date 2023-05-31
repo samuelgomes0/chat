@@ -5,19 +5,16 @@ import io from "socket.io-client";
 
 export default function Join({ setChatVisible, setSocket }) {
   const usernameRef = useRef();
-  const passwordRef = useRef();
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
 
     const username = usernameRef.current.value;
-    const password = passwordRef.current.value;
 
-    if (!username.trim() || !password.trim()) return;
+    if (!username.trim()) return;
 
     const user = {
       username,
-      password,
     };
 
     localStorage.setItem("user", JSON.stringify(user));
@@ -46,17 +43,6 @@ export default function Join({ setChatVisible, setSocket }) {
           placeholder="Insert your username"
           autoComplete="off"
           ref={usernameRef}
-          className="mb-4 rounded border border-neutral-300 p-2.5 text-sm transition-colors hover:bg-gray-100 focus:border-transparent focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-600"
-        ></input>
-        <label htmlFor="password" className="mb-1 text-sm text-gray-600">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Insert your password"
-          autoComplete="off"
-          ref={passwordRef}
           className="mb-4 rounded border border-neutral-300 p-2.5 text-sm transition-colors hover:bg-gray-100 focus:border-transparent focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-600"
         ></input>
         <button
