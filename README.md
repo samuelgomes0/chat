@@ -21,11 +21,11 @@ Para usar esta aplicação, siga estas etapas:
 ## 🛠️ Tecnologias utilizadas
 Esta aplicação usa as seguintes tecnologias:
 
-- **Node.JS** - plataforma de desenvolvimento que permite a criação de aplicativos de servidor em JavaScript.
-- **Express** - framework para Node.js que simplifica a criação de aplicativos web, fornecendo uma estrutura robusta e flexível para lidar com rotas, middleware e solicitações HTTP.
-- **Socket.IO** - biblioteca que permite a comunicação em tempo real entre o servidor e o cliente, permitindo a troca de dados bidirecional e instantânea.
-- **React.JS** - biblioteca JavaScript para criação de interfaces de usuário interativas e reativas, permitindo a construção eficiente de componentes reutilizáveis para construir aplicativos web complexos.
-- **Tailwind CSS** - framework CSS altamente configurável e utilitário que simplifica a estilização de elementos HTML, fornecendo classes pré-definidas que podem ser combinadas para criar estilos personalizados de forma rápida e eficiente.
+- **[Node.JS](https://nodejs.org/en)** - plataforma de desenvolvimento que permite a criação de aplicativos de servidor em JavaScript.
+- **[Express](https://expressjs.com/pt-br/)** - framework para Node.js que simplifica a criação de aplicativos web, fornecendo uma estrutura robusta e flexível para lidar com rotas, middleware e solicitações HTTP.
+- **[Socket.IO](https://socket.io/)** - biblioteca que permite a comunicação em tempo real entre o servidor e o cliente, permitindo a troca de dados bidirecional e instantânea.
+- **[React.JS](https://react.dev/)** - biblioteca JavaScript para criação de interfaces de usuário interativas e reativas, permitindo a construção eficiente de componentes reutilizáveis para construir aplicativos web complexos.
+- **[Tailwind CSS](https://tailwindcss.com/)** - framework CSS altamente configurável e utilitário que simplifica a estilização de elementos HTML, fornecendo classes pré-definidas que podem ser combinadas para criar estilos personalizados de forma rápida e eficiente.
 
 ## ⚙️ To Do
    ### Usuário
