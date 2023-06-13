@@ -19,7 +19,7 @@ export default function Join({ setChatVisible, setSocket }) {
 
     localStorage.setItem("user", JSON.stringify(user));
 
-    const socket = io("https://chat-ahbg.onrender.com");
+    const socket = io("https://chat-uenz.onrender.com");
 
     socket.emit("join", username);
 

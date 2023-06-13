@@ -64,20 +64,25 @@ export default function Chat({ socket }) {
     bottomRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  // O useEffect será executado quando o componente for montado e sempre que o valor de "socket" mudar.
   useEffect(() => {
+    // Quando o evento "user joined" for acionado no socket, o usuário será atualizado com o nome de usuário recebido.
     socket.on("user joined", (user) => {
       setUsername(user.username);
     });
 
+    // Quando o evento "receive message" for acionado no socket, a nova mensagem será adicionada à lista de mensagens e a última mensagem será atualizada.
     socket.on("receive message", (message) => {
       setMessageList((previous) => [...previous, message]);
       setLastMessage(message.text);
     });
 
+    // Quando o evento "user typing" for acionado no socket, o estado de digitação do usuário será atualizado e a referência para o usuário digitando será atualizada.
     socket.on("user typing", (isTyping) => {
       setIsTyping(isTyping);
       userTypingRef.current = isTyping.username;
 
+      // Se o usuário parar de digitar, o estado de digitação será desativado após 3 segundos.
       if (!isTyping) {
         setTimeout(() => {
           setIsTyping(false);
@@ -85,10 +90,12 @@ export default function Chat({ socket }) {
       }
     });
 
+    // Quando o evento "online users" for acionado no socket, a lista de usuários online será atualizada.
     socket.on("online users", (users) => {
       setOnlineUsers(users);
     });
 
+    // Retorno da função de efeito: remoção dos event listeners ao desmontar o componente.
     return () => {
       socket.off("user joined");
       socket.off("receive message");
@@ -97,7 +104,9 @@ export default function Chat({ socket }) {
     };
   }, [socket]);
 
+  // O useEffect será executado sempre que o valor de "messageList" mudar.
   useEffect(() => {
+    // Chama a função scrollToBottom para rolar para a parte inferior da lista de mensagens.
     scrollToBottom();
   }, [messageList]);
 
@@ -141,7 +150,7 @@ export default function Chat({ socket }) {
         </div>
       </div>
       <div className="flex h-full w-full flex-col justify-between gap-4 rounded-xl border border-gray-300 bg-white p-4 shadow-sm">
-        <ul className="flex h-full flex-col gap-4 overflow-y-auto">
+        <ul className="flex h-full flex-col gap-4 overflow-y-auto px-4">
           {messageList.map((message, index) => (
             <Message key={index} message={message} socket={socket} />
           ))}
