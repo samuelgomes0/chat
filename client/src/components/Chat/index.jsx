@@ -46,6 +46,16 @@ export default function Chat({ socket }) {
     setUsername(newUsername);
   };
 
+  const searchUser = (event) => {
+    const text = event.target.value;
+
+    const filteredUsers = onlineUsers.filter((user) =>
+      user.username.toLowerCase().includes(text.toLowerCase())
+    );
+
+    setOnlineUsers(filteredUsers);
+  };
+
   const handleTyping = () => {
     const text = messageRef.current.value;
 
@@ -118,6 +128,7 @@ export default function Chat({ socket }) {
           placeholder="Search"
           autoComplete="off"
           className="w-full rounded-xl border border-gray-300 bg-white p-3.5 text-sm shadow-sm transition-colors hover:bg-neutral-100 focus:border-transparent focus:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          onChange={searchUser}
         />
         <ul className="h-full overflow-y-auto rounded-xl border border-gray-300 bg-white shadow-sm">
           {onlineUsers.map(
