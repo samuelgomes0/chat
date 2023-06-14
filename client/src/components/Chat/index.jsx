@@ -8,6 +8,7 @@ export default function Chat({ socket }) {
   const [isTyping, setIsTyping] = useState(false);
   const [username, setUsername] = useState("");
   const [lastMessage, setLastMessage] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const messageRef = useRef();
   const userTypingRef = useRef();
@@ -49,11 +50,16 @@ export default function Chat({ socket }) {
   const searchUser = (event) => {
     const text = event.target.value;
 
-    const filteredUsers = onlineUsers.filter((user) =>
+    if (!text.trim()) {
+      setFilteredUsers([]);
+      return;
+    }
+
+    const filtered = onlineUsers.filter((user) =>
       user.username.toLowerCase().includes(text.toLowerCase())
     );
 
-    setOnlineUsers(filteredUsers);
+    setFilteredUsers(filtered);
   };
 
   const handleTyping = () => {
@@ -131,18 +137,20 @@ export default function Chat({ socket }) {
           onChange={searchUser}
         />
         <ul className="h-full overflow-y-auto rounded-xl border border-gray-300 bg-white shadow-sm">
-          {onlineUsers.map(
-            (user, index) =>
-              user.id !== socket.id && (
-                <li
-                  key={index}
-                  className="h-20 border-b border-gray-200 p-4 transition-colors hover:cursor-pointer hover:bg-neutral-200"
-                >
-                  <h3 className="font-semibold">{user.username}</h3>
-                  <p className="text-sm text-gray-500">{lastMessage}</p>
-                </li>
-              )
-          )}
+          {filteredUsers
+            ? filteredUsers
+            : onlineUsers.map(
+                (user, index) =>
+                  user.id !== socket.id && (
+                    <li
+                      key={index}
+                      className="h-20 border-b border-gray-200 p-4 transition-colors hover:cursor-pointer hover:bg-neutral-200"
+                    >
+                      <h3 className="font-semibold">{user.username}</h3>
+                      <p className="text-sm text-gray-500">{lastMessage}</p>
+                    </li>
+                  )
+              )}
         </ul>
         <div className="flex justify-between rounded-xl border border-gray-300 bg-white p-4 text-center shadow-sm">
           <h3
